@@ -60,17 +60,19 @@ margin-bottom: 5px;
 #five-day-forcast {
     display: flex;
     position: relative;
+    justify-content: center;
 }
 
 .display-5-day {
     background-color: lightcyan;
     border-radius: 10px;
-    width: 75px;
+    width: 150px;
     height:180px;
     padding: 5px;
     margin: 10px;
     text-align: center;
     font-size: 10px;
+    display: inline-flex;
 }
 
 
