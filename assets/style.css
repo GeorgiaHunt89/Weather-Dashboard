@@ -11,7 +11,7 @@ body {
     background-color: #cccccc;
     width: 100%;
     height: auto;
-    background-size: cover;
+    background-size: auto;
 }
 
 /* Dashboard Heading Section */
@@ -22,7 +22,11 @@ body {
     text-align: center;
 }
 
-/* Headings
+/* search */
+#seach-history {
+    float: left;
+    justify-content: left;
+}
 
 /* Buttons */
 button {
@@ -33,6 +37,8 @@ button {
     outline: none;
     padding: 6px;
     font-weight: bold;
+    border: none;
+
 }
 
 button:hover {
@@ -40,6 +46,56 @@ button:hover {
     color: lightskyblue;
 }
 
-/* Five Day Weather Section
+/* Current Weather section */
+.card {
+padding:5px;
+margin-bottom: 5px;
+}
 
-/* Media Queries
+.uv-index {
+    color: red;
+}
+
+/* Five Day Weather Section */
+#five-day-forcast {
+    display: flex;
+    position: relative;
+}
+
+.display-5-day {
+    background-color: lightcyan;
+    border-radius: 10px;
+    width: 75px;
+    height:180px;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+    font-size: 10px;
+}
+
+
+/* Media Queries */
+@media (max-width: 990px){
+    .display-5-day {
+        width: 200px;
+        height:300px;
+    }
+}
+
+@media (max-width: 760px) {
+    #current-weather-section {
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    #five-day-forcast {
+        width: 100%;
+        margin: 0 auto
+    }
+}
+
+@media (max-width:570px) {
+    .display-5-day {
+        margin: 5px auto;
+    }
+}
