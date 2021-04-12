@@ -1,9 +1,10 @@
 // Global Const
-const $enterCity = document.querySelector('enter-city');
-const $searchButton = document.querySelector ('search-button');
-const $clearHistory = document.querySelector ('clear-history');
-const $cityName = document.querySelector ('city-name');
-const $currentWeather = document.querySelector ('current-weather');
+const $enterCity = document.querySelector('#enter-city');
+const $userForm = document.querySelector('#user-form');
+const $searchButton = document.querySelector ('#search-button');
+const $clearHistory = document.querySelector ('#clear-history');
+const $cityName = document.querySelector ('#city-name');
+const $currentWeather = document.querySelector ('#current-weather');
 const $currentWeatherImg = document.querySelector ('current-weather-img');
 const $temperature = document.querySelector ('temperature');
 const $feelsLike = document.querySelector ('feels-like')
@@ -15,30 +16,31 @@ const $fiveDayForcast = document.querySelector ('five-day-forcast');
 let searchHistory = JSON.parse(localStorage.getItem('search')) || [];
 
 // Obtain and assign API key
-const APIKey = '2154877dfa22839f66251364284b95a9';
+const API_KEY = '2154877dfa22839f66251364284b95a9';
 
 // Connect to OpenWeather and request current weather from API
 function requestWeather (requestCityName){
-    let queryURL = ('https://api.openweathermap.org/data/2.5/forecast?q=' + requestCityName '&units=metric&appid=' + APIkey);
+    let queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${requestCityName}&units=metric&appid=${API_KEY}`;
     fetch (queryURL)
-    .then(function (response {
+    .then( response => response.json())
+    .then(function (data) {
 
         // Calculate current date through dayjs 
         const todayDate = dayjs().format('dddd, MMMM D, YYYY h:mm A');
         $("#currentDay").html(todayDate);
         // Request current weather for city, temp, humidity, feels like, wind speed and weather icon
-        $cityName.innerHTML = response.data.name + '('todayDate')':
-        let weatherImg = response.data.weather[0].icon;
-        $currentWeatherImg.setAttribute ('src ='https://openweathermap.org/img/wn/' + weatherImg + '@2x.pmg');
-        $currentWeatherImg.setAttribute ('alt', response.data.weather[0].description);
-        $temperature.innerHTML = 'Temperature: ' + k2C(response.data.main.temp) + '&#17C';
-        $feelsLike.innerHTML= 'Feels Like: ' + response.data.feels.like + 'degrees'
-        $humidity.innerHTML = 'Humidity: ' + response.data.main.humidty + '%';
-        $windSpeed.innerHTML = 'Wind Speed: ' + response.data.wind.speed + ' mph';
+        $cityName.innerHTML = `${data.city.name} (${todayDate})`;
+        let weatherImg = data.city.weather[0].icon;
+        $currentWeatherImg.setAttribute('src', `https://openweathermap.org/img/wn/${weatherImg}@2x.pmg`);
+        $currentWeatherImg.setAttribute('alt', data.weather[0].description);
+        $temperature.innerHTML = 'Temperature: ' + data.main.temp + ' degrees';
+        $feelsLike.innerHTML= 'Feels Like: ' + data.feels_like + ' degrees'
+        $humidity.innerHTML = 'Humidity: ' + data.main.humidty + '%';
+        $windSpeed.innerHTML = 'Wind Speed: ' + data.wind.speed + ' mph';
     
         // Request UV index
-        let lat = response.data.coord.lat;
-        let lon = response.data.coord.lon;
+        let lat = data.coord.lat;
+        let lon = data.coord.lon;
         let UVQueryURL = 'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + APIKey + '&cnt=1';
         fetch (UVQueryURL)
         .then(function (response) {
@@ -61,5 +63,11 @@ function requestWeather (requestCityName){
 
         });
     
-    }))
+    });
 }
+
+$userForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const city = $enterCity.value.trim();
+    requestWeather(city);
+})
