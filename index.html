@@ -20,11 +20,12 @@
     <!-- Search Bar Section -->
         <section class='row'>
             <h2 class='col-md-4'>Search for a City:</h2>
-            <div class='input-group mb-4'>
-                <input id='enter-city' type='text' class='form-control' placeholder='Enter a city' aria-label='Enter a City'>  
+        </section>
+        <section class='row'>
+            <div class='input-group mb-4 col-md-4'>
+                <input type='text' class='form-control' placeholder='Enter a City' aria-label='Enter a City' aria-describedby='button-addon2' id='enter-city'>  
             <div class='input-group-append'>
-                <button class='btn main-btn' type='button' id='search-button'>
-                    <i class='fas fa-search'></i>
+                <button class='btn main-btn' type='button' id='search-button'><i class='fas fa-search'></i>
                 </button>
             </div>
             </div>
@@ -36,20 +37,29 @@
                 <h2 class='center-text'>Current Weather</h2>
                 <div id='current-weather-display'></div>
             </section>
+        </section>
 
     <!-- Save Searches Section -->
             <section class='row'>
-                <div class='col-md-4' id='search-history'></div>
-
-    <!-- Five Day Forcast Section -->
-
-
+                <div class='col-md-4' id='search-history'>
             </section>
 
-        </section>
-
-
     <!-- Five Day Forcast Section -->
+    <section class='card col-md-8' style='width:20rem;' id='five-day-forcast'>      
+    <h3>Five Day Forcast</h3>
+            
+            <section class='row'>
+                <div class='col-md-3 display-5-day'>Day 1<div id='day-1'></div></div>
+                <div class='col-md-3 display-5-day'>Day 2<div id='day-2'></div></div>
+                <div class='col-md-3 display-5-day'>Day 3<div id='day-3'></div></div>
+                <div class='col-md-3 display-5-day'>Day 4<div id='day-4'></div></div>
+                <div class='col-md-3 display-5-day'>Day 5<div id='day-5'></div></div>
+            </section>
+        </section> 
+    </div>
+            
+
+        </section>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
