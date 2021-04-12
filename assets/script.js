@@ -20,7 +20,7 @@ const APIKey = '2154877dfa22839f66251364284b95a9';
 // Connect to OpenWeather and request current weather from API
 function requestWeather (requestCityName){
     let queryURL = ('https://api.openweathermap.org/data/2.5/forecast?q=' + requestCityName '&units=metric&appid=' + APIkey);
-    axios.get(queryURL)
+    fetch (queryURL)
     .then(function (response {
 
         // Calculate current date through dayjs 
@@ -32,15 +32,15 @@ function requestWeather (requestCityName){
         $currentWeatherImg.setAttribute ('src ='https://openweathermap.org/img/wn/' + weatherImg + '@2x.pmg');
         $currentWeatherImg.setAttribute ('alt', response.data.weather[0].description);
         $temperature.innerHTML = 'Temperature: ' + k2C(response.data.main.temp) + '&#17C';
-        $feelsLike.innerHTML= 'Feels Like: ' + response.data.feels.like 
-        $humidity.innerHTML = 'Humidity: ' + response.data.main.humidty + "%";
+        $feelsLike.innerHTML= 'Feels Like: ' + response.data.feels.like + 'degrees'
+        $humidity.innerHTML = 'Humidity: ' + response.data.main.humidty + '%';
         $windSpeed.innerHTML = 'Wind Speed: ' + response.data.wind.speed + ' mph';
     
         // Request UV index
         let lat = response.data.coord.lat;
         let lon = response.data.coord.lon;
         let UVQueryURL = 'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + APIKey + '&cnt=1';
-        axios.get (UVQueryURL)
+        fetch (UVQueryURL)
         .then(function (response) {
             let UVIndex = document.createElement('span');
 
@@ -58,6 +58,7 @@ function requestWeather (requestCityName){
             UVIndex.innerHTML = response.data[0].value;
             $currentUVIndex.innerHTML = 'UV Index: ';
             $currentUVIndex.append(UVIndex);
+
         });
     
     }))
