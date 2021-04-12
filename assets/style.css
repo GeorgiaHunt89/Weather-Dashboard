@@ -7,6 +7,8 @@
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-image: url(https://github.com/GeorgiaHunt89/Weather-Dashboard/blob/main/assets/Images/Background-cloud-image.png?raw=true);
+    background-color: #cccccc;
 }
 
 /* Dashboard Heading Section */
