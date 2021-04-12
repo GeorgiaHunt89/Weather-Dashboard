@@ -5,14 +5,16 @@ const $searchButton = document.querySelector ('#search-button');
 const $clearHistory = document.querySelector ('#clear-history');
 const $cityName = document.querySelector ('#city-name');
 const $currentWeather = document.querySelector ('#current-weather');
-const $currentWeatherImg = document.querySelector ('current-weather-img');
-const $temperature = document.querySelector ('temperature');
-const $feelsLike = document.querySelector ('feels-like')
-const $humidity = document.querySelector ('humidity');
-const $windSpeed = document.querySelector ('wind-speed');
-const $currentUVIndex = document.querySelector ('UV-index');
-const $history = document.querySelector ('search-history');
-const $fiveDayForcast = document.querySelector ('five-day-forcast');
+const $currentWeatherImg = document.querySelector ('#current-weather-img');
+const $temperature = document.querySelector ('#temperature');
+const $feelsLike = document.querySelector ('#feels-like')
+const $humidity = document.querySelector ('#humidity');
+const $windSpeed = document.querySelector ('#wind-speed');
+const $minTemperature = document.querySelector ('#min-temperature');
+const $maxTemperature = document.querySelector ('#max-temperature');
+const $currentUVIndex = document.querySelector ('#UV-index');
+const $history = document.querySelector ('#search-history');
+const $fiveDayForcast = document.querySelector ('#five-day-forcast');
 let searchHistory = JSON.parse(localStorage.getItem('search')) || [];
 
 // Obtain and assign API key
@@ -26,22 +28,24 @@ function requestWeather (requestCityName){
     .then(function (data) {
 
         // Calculate current date through dayjs 
-        const todayDate = dayjs().format('dddd, MMMM D, YYYY h:mm A');
+        const todayDate = dayjs().format('dddd, MMMM D, YYYY, h:mmA');
         $("#currentDay").html(todayDate);
         // Request current weather for city, temp, humidity, feels like, wind speed and weather icon
         $cityName.innerHTML = `${data.city.name} (${todayDate})`;
-        let weatherImg = data.city.weather[0].icon;
+        let weatherImg = data.list[2].weather.icon;
         $currentWeatherImg.setAttribute('src', `https://openweathermap.org/img/wn/${weatherImg}@2x.pmg`);
-        $currentWeatherImg.setAttribute('alt', data.weather[0].description);
-        $temperature.innerHTML = 'Temperature: ' + data.main.temp + ' degrees';
-        $feelsLike.innerHTML= 'Feels Like: ' + data.feels_like + ' degrees'
-        $humidity.innerHTML = 'Humidity: ' + data.main.humidty + '%';
-        $windSpeed.innerHTML = 'Wind Speed: ' + data.wind.speed + ' mph';
+        $currentWeatherImg.setAttribute('alt', data.list[2].weather.description);
+        $temperature.innerHTML = `${'Temperature: '}${data.list[1].main.temp}${' \u00B0C'}`;
+        $feelsLike.innerHTML=  `${'Feels Like: '}${data.list[1].main.feels_like}${' \u00B0C'}`
+        $humidity.innerHTML = `${'Humidity: '}${data.list[1].main.humidity}${' %'}`;
+        $windSpeed.innerHTML = `${'Wind Speed: '}${data.list[4].wind.speed}${' mph'}`;
+        $minTemperature.innerHTML = `${'Min Temperature: '}${data.list[1].main.temp_min}${' \u00B0C'}`;
+        $maxTemperature.innerHTML = `${'Max Temperature: '}${data.list[1].main.temp_max}${' \u00B0C'}`;
     
         // Request UV index
-        let lat = data.coord.lat;
-        let lon = data.coord.lon;
-        let UVQueryURL = 'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + APIKey + '&cnt=1';
+        let lat = `${data.city.coord.lat}`;
+        let lon = `${data.city.coord.lon}`;
+        let UVQueryURL = 'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + API_KEY + '&cnt=1';
         fetch (UVQueryURL)
         .then(function (response) {
             let UVIndex = document.createElement('span');
