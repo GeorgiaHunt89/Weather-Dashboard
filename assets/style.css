@@ -7,15 +7,20 @@
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-image: url(https://github.com/GeorgiaHunt89/Weather-Dashboard/blob/main/assets/Images/Background-cloud-image.png?raw=true);
+    background-image: url(https://github.com/GeorgiaHunt89/Weather-Dashboard/blob/main/assets/Images/White-Clouds-Background-Image.png?raw=true);
     background-color: #cccccc;
+    width: 100%;
+    height: auto;
+    background-size: cover;
 }
 
 /* Dashboard Heading Section */
 
 #heading-dashboard {
-    background-color: aquamarine;
-    
+    background-color: lightskyblue;
+    color: whitesmoke;
+    padding: 15px;
+    text-align: center;
 }
 /* Headings
 
