@@ -16,14 +16,15 @@
         <h1 class='text-center display-5'>Weather Dashboard</h1>
     </header>
 
+    <main>
     <!-- Search Bar Section -->
-    <main class="flex-row justify-space-between">
+    <aside class="flex-row justify-space-between">
         <div class="col-12 col-md-4">
     
           <div class="card">
             <h2 class="card-header text-uppercase">Search for a city</h2>
             <form id="user-form" class="card-body">
-              <input name="search-city" placeholder='Enter City' id="enter-city" type="text" autofocus="true" class="form-input" />
+                <input name="search-city" placeholder='Enter City' id="enter-city" type="text" autofocus="true" class="form-input" />
               <br>
               <br>
               <button type="submit" id='search-button' class="btn">Find City</button>
@@ -33,10 +34,12 @@
             </form>
           </div>
         </div>
+        </aside>
 
     <!-- Current Weather Display Section -->
-            <section class='card col-12 col-md-4 current-weather-section' id='current-weather'>
-                    <h2 id='city-name' class='city-name align-middle'></h2>
+            <section class='card current-weather-section' id='current-weather'>
+                <div class="col-12 col-md-4">
+                <h2 id='city-name' class='city-name align-middle'></h2>
                 <img id='current-weather-img' alt=''>
                 <p id='temperature'></p>
                 <p id='feels-like'></p>
@@ -45,7 +48,9 @@
                 <p id='UV-index'></p>
                 </div>
             </section>
-        </section>
+        
+            
+                    
 
     <!-- Save Searches Section -->
             <section class='row'>
@@ -70,7 +75,7 @@
             
 
         </section>
-
+    </main>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -79,7 +84,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
     <script src="assets/script.js"></script>
 
-
-    </main>
 </body>
 </html>
