@@ -51,17 +51,17 @@ function requestWeather (requestCityName){
             let UVIndex = document.createElement('span');
 
             // Set UV Index prompts to display red for high, yellow for medium and green for low
-            if (response.data[0].value < 4){
+            if (response < 4){
                 UVIndex.setAttribute('class', 'badge badge-low');
             }
-            else if (response.data[0].value <8){
+            else if (response < 8){
                 UVIndex.setAttribute('class', 'badge badge-medium');
             }
             else {
                 UVIndex.setAttribute('class', 'badge badge-high');
             }
-            console.log(response.data[0].value)
-            UVIndex.innerHTML = response.data[0].value;
+            console.log(response)
+            UVIndex.innerHTML = response;
             $currentUVIndex.innerHTML = 'UV Index: ';
             $currentUVIndex.append(UVIndex);
 
