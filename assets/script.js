@@ -9,7 +9,7 @@ const $temperature = document.querySelector ('temperature');
 const $feelsLike = document.querySelector ('feels-like')
 const $humidity = document.querySelector ('humidity');
 const $windSpeed = document.querySelector ('wind-speed');
-const $uvIndex = document.querySelector ('UV-index');
+const $currentUVIndex = document.querySelector ('UV-index');
 const $history = document.querySelector ('search-history');
 const $fiveDayForcast = document.querySelector ('five-day-forcast');
 let searchHistory = JSON.parse(localStorage.getItem('search')) || [];
@@ -19,7 +19,7 @@ const APIKey = '2154877dfa22839f66251364284b95a9';
 
 // Connect to OpenWeather and request current weather from API
 function requestWeather (requestCityName){
-    let queryURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + requestCityName '&units=metric&appid=' + APIkey;
+    let queryURL = ('https://api.openweathermap.org/data/2.5/forecast?q=' + requestCityName '&units=metric&appid=' + APIkey);
     axios.get(queryURL)
     .then(function (response {
 
@@ -36,7 +36,29 @@ function requestWeather (requestCityName){
         $humidity.innerHTML = 'Humidity: ' + response.data.main.humidty + "%";
         $windSpeed.innerHTML = 'Wind Speed: ' + response.data.wind.speed + ' mph';
     
-        
+        // Request UV index
+        let lat = response.data.coord.lat;
+        let lon = response.data.coord.lon;
+        let UVQueryURL = 'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + APIKey + '&cnt=1';
+        axios.get (UVQueryURL)
+        .then(function (response) {
+            let UVIndex = document.createElement('span');
+
+            // Set UV Index prompts to display red for high, yellow for medium and green for low
+            if (response.data[0].value < 4){
+                UVIndex.setAttribute('class', 'badge badge-low');
+            }
+            else if (response.data[0].value <8){
+                UVIndex.setAttribute('class', 'badge badge-medium');
+            }
+            else {
+                UVIndex.setAttribute('class', 'badge badge-high');
+            }
+            console.log(response.data[0].value)
+            UVIndex.innerHTML = response.data[0].value;
+            $currentUVIndex.innerHTML = 'UV Index: ';
+            $currentUVIndex.append(UVIndex);
+        });
     
     }))
 }
