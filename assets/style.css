@@ -1,4 +1,13 @@
-/* Background and Body CSS formatting
+/* Background and Body CSS formatting */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
 /* Dashboard Heading Section
 
