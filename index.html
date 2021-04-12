@@ -16,26 +16,33 @@
         <h1 class='text-center display-5'>Weather Dashboard</h1>
     </header>
 
-    <main class='container'>
     <!-- Search Bar Section -->
-        <section class='row'>
-            <h2 class='col-md-4'>Search for a City:</h2>
-        </section>
-        <section class='row'>
-            <div class='input-group mb-4 col-md-4'>
-                <input type='text' class='form-control' placeholder='Enter a City' aria-label='Enter a City' aria-describedby='button-addon2' id='enter-city'>  
-            <div class='input-group-append'>
-                <button class='btn main-btn' type='button' id='search-button'><i class='fas fa-search'></i>
-                </button>
-            </div>
-            </div>
-            <button class='btn main-btn mb-4' type='button' id='clear-history'>Clear History</button>
-            <form id='history'></form>        
+    <main class="flex-row justify-space-between">
+        <div class="col-12 col-md-4">
+    
+          <div class="card">
+            <h2 class="card-header text-uppercase">Search for a city</h2>
+            <form id="user-form" class="card-body">
+              <input name="search-city" placeholder='Enter City' id="enter-city" type="text" autofocus="true" class="form-input" />
+              <br>
+              <br>
+              <button type="submit" id='search-button' class="btn">Find City</button>
+
+              <button class='btn main-btn mb-4' type='button' id='clear-history'>Clear History</button>
+                <form id='history'></form>        
+            </form>
+          </div>
+        </div>
 
     <!-- Current Weather Display Section -->
-            <section class='card col-md-9' style='width: 20rem;' id='current-weather-section'>
-                <h2 class='center-text'>Current Weather</h2>
-                <div id='current-weather-display'></div>
+            <section class='card col-12 col-md-4 current-weather-section' id='current-weather'>
+                    <h2 id='city-name' class='city-name align-middle'></h2>
+                <img id='current-weather-img' alt=''>
+                <p id='temperature'></p>
+                <p id='humidity'></p>
+                <p id='wind-speed'></p>
+                <p id='UV-index'></p>
+                </div>
             </section>
         </section>
 
