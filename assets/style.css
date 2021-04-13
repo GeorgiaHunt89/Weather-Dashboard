@@ -37,7 +37,7 @@ h2 {
 }
 
 /* search */
-#seach-history {
+#search-history {
     float: left;
     justify-content: left;
 }
@@ -89,7 +89,7 @@ margin-bottom: 5px;
 }
 
 /* Five Day Weather Section */
-#five-day-forcast {
+#five-day-forecast {
     display: flex;
     position: relative;
     justify-content: center;
@@ -122,7 +122,7 @@ margin-bottom: 5px;
         margin: 0 auto;
     }
     
-    #five-day-forcast {
+    #five-day-forecast {
         width: 100%;
         margin: 0 auto
     }

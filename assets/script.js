@@ -75,10 +75,11 @@ $userForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const city = $enterCity.value.trim();
     requestWeather(city);
+    requestFiveDayForecast(city);
 });
 
 // Request 5 day Forecast
-function requestFiveDayForecast (requestCityName){
+function requestFiveDayForecast (requestCityName) {
     let fiveDayForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${requestCityName}&units=metric&appid=${API_KEY}`;
     fetch (fiveDayForecastQueryURL)
     .then( response => response.json())
@@ -91,12 +92,24 @@ function requestFiveDayForecast (requestCityName){
             fiveDayIcons.push(data.list[2].weather.icon);
         }
         for(var i = 0; i < fiveDayIcons.length; i++){
-            var dailyIcon = `https://openweathermap.org/img/wn/${weatherImg[i]}@2x.png`;
+            var dailyIcon = `https://openweathermap.org/img/wn/${fiveDayIcons[i]}@2x.png`;
             var fiveDayIconLocation = $('<div>');
             var fiveDayIconImg =$('<img>').attr('src', dailyIcon);
             fiveDayIconLocation.append(fiveDayIconImg);
             $('#day-' + (i + 1)).append(fiveDayIconImg);
+        }
 
+        // Daily weather temperature
+        const fiveDayTemps = [];
+        for (var i = 0; i < data.list.length; i+=8){
+            fiveDayTemps.push(data.list[1].main.temp);
+        }
+        for(var i = 0; i < fiveDayTemps.length; i++){
+            var dailyTemp = fiveDayTemps[i];
+            var parent = $('<div>');
+            var child =$ ('<p>').text('Temperature: ' + dailyTemp + ' \u00B0C');
+            parent.append(child);
+            $('#day-' + (i + 1).toString()).html(parent);
         }
         
     })
