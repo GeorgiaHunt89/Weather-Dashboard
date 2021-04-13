@@ -32,7 +32,7 @@ function requestWeather (requestCityName){
         $("#currentDay").html(todayDate);
         // Request current weather for city, temp, humidity, feels like, wind speed and weather icon
         $cityName.innerHTML = `${data.city.name} (${todayDate})`;
-        const {weatherImg} = `${data.list[2].weather.icon}`;
+        const {weatherImg} = `${data.list[2].weather[0].icon}`;
         $currentWeatherImg.setAttribute = `https://openweathermap.org/img/wn/${weatherImg}@2x.png`;
         $currentWeatherImg.setAttribute = `${'alt'}${data.list[2].weather.description}`;
         $temperature.innerHTML = `${'Temperature: '}${data.list[1].main.temp}${' \u00B0C'}`;
@@ -111,6 +111,6 @@ function requestFiveDayForecast (requestCityName) {
             parent.append(child);
             $('#day-' + (i + 1).toString()).html(parent);
         }
-        
+
     })
 };
