@@ -14,7 +14,7 @@ const $minTemperature = document.querySelector ('#min-temperature');
 const $maxTemperature = document.querySelector ('#max-temperature');
 const $currentUVIndex = document.querySelector ('#UV-index');
 const $history = document.querySelector ('#search-history');
-const $fiveDayForcast = document.querySelector ('#five-day-forcast');
+const $fiveDayForecast = document.querySelector ('#five-day-forecast');
 let searchHistory = JSON.parse(localStorage.getItem('search')) || [];
 
 // Obtain and assign API key
@@ -33,7 +33,7 @@ function requestWeather (requestCityName){
         // Request current weather for city, temp, humidity, feels like, wind speed and weather icon
         $cityName.innerHTML = `${data.city.name} (${todayDate})`;
         let weatherImg = data.list[2].weather.icon;
-        $currentWeatherImg.setAttribute('src', `https://openweathermap.org/img/wn/${weatherImg}@2x.pmg`);
+        $currentWeatherImg.setAttribute('src', `https://openweathermap.org/img/wn/${weatherImg}@2x.png`);
         $currentWeatherImg.setAttribute('alt', data.list[2].weather.description);
         $temperature.innerHTML = `${'Temperature: '}${data.list[1].main.temp}${' \u00B0C'}`;
         $feelsLike.innerHTML=  `${'Feels Like: '}${data.list[1].main.feels_like}${' \u00B0C'}`
@@ -60,18 +60,36 @@ function requestWeather (requestCityName){
             else {
                 UVIndex.setAttribute('class', 'badge badge-high');
             }
-            console.log(UVIndex)
-            UVIndex.innerHTML = response;
-            $currentUVIndex.innerHTML = 'UV Index: ';
-            $currentUVIndex.append(UVIndex);
+            //console.log(UVIndex)
+            //UVIndex.innerHTML = response;
+            //$currentUVIndex.innerHTML = 'UV Index: ';
+            //$currentUVIndex.append(UVIndex);
 
         });
     
     });
 }
 
+// Event listener to activate submit function
 $userForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const city = $enterCity.value.trim();
     requestWeather(city);
-})
+});
+
+// Request 5 day Forecast
+function requestFiveDayForecast (requestCityName){
+    let fiveDayForecastQueryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${requestCityName}&units=metric&appid=${API_KEY}`;
+    fetch (fiveDayForecastQueryURL)
+    .then( response => response.json())
+    .then(function (data) {
+
+        // Request current weather for city, temp, humidity, feels like, wind speed and weather icon for next 5 days
+        // Daily weather icon
+        const dailyIcons = [];
+        for (var i = 0; i < data.list.length; i+=8){
+            dailyIcons.push(data.list[2].weather.icon);
+        }
+        
+    })
+};
