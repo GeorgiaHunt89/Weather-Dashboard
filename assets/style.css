@@ -50,7 +50,7 @@ button {
     transition: all 0.3s;
     outline: none;
     padding: 6px 5px;
-    margin: 5px
+    margin: 5px;
     font-weight: bold;
     border: none;
 
@@ -77,6 +77,15 @@ margin-bottom: 5px;
     float: right;
     justify-content: center;
 
+}
+
+/* UV Index */
+.badge-low {
+    padding: 5px;
+    margin: 5px;
+    display: block;
+    background-color: lightgreen;
+    color: whitesmoke;
 }
 
 /* Five Day Weather Section */

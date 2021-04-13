@@ -60,7 +60,7 @@ function requestWeather (requestCityName){
             else {
                 UVIndex.setAttribute('class', 'badge badge-high');
             }
-            console.log(response)
+            console.log(UVIndex)
             UVIndex.innerHTML = response;
             $currentUVIndex.innerHTML = 'UV Index: ';
             $currentUVIndex.append(UVIndex);
