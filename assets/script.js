@@ -32,9 +32,9 @@ function requestWeather (requestCityName){
         $("#currentDay").html(todayDate);
         // Request current weather for city, temp, humidity, feels like, wind speed and weather icon
         $cityName.innerHTML = `${data.city.name} (${todayDate})`;
-        let weatherImg = data.list[2].weather.icon;
-        $currentWeatherImg.setAttribute('src', `https://openweathermap.org/img/wn/${weatherImg}@2x.png`);
-        $currentWeatherImg.setAttribute('alt', data.list[2].weather.description);
+        const {weatherImg} = `${data.list[2].weather.icon}`;
+        $currentWeatherImg.setAttribute = `https://openweathermap.org/img/wn/${weatherImg}@2x.png`;
+        $currentWeatherImg.setAttribute = `${'alt'}${data.list[2].weather.description}`;
         $temperature.innerHTML = `${'Temperature: '}${data.list[1].main.temp}${' \u00B0C'}`;
         $feelsLike.innerHTML=  `${'Feels Like: '}${data.list[1].main.feels_like}${' \u00B0C'}`
         $humidity.innerHTML = `${'Humidity: '}${data.list[1].main.humidity}${' %'}`;
@@ -86,9 +86,17 @@ function requestFiveDayForecast (requestCityName){
 
         // Request current weather for city, temp, humidity, feels like, wind speed and weather icon for next 5 days
         // Daily weather icon
-        const dailyIcons = [];
+        const fiveDayIcons = [];
         for (var i = 0; i < data.list.length; i+=8){
-            dailyIcons.push(data.list[2].weather.icon);
+            fiveDayIcons.push(data.list[2].weather.icon);
+        }
+        for(var i = 0; i < fiveDayIcons.length; i++){
+            var dailyIcon = `https://openweathermap.org/img/wn/${weatherImg[i]}@2x.png`;
+            var fiveDayIconLocation = $('<div>');
+            var fiveDayIconImg =$('<img>').attr('src', dailyIcon);
+            fiveDayIconLocation.append(fiveDayIconImg);
+            $('#day-' + (i + 1)).append(fiveDayIconImg);
+
         }
         
     })
