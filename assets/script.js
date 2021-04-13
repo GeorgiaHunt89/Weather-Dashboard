@@ -107,7 +107,20 @@ function requestFiveDayForecast (requestCityName) {
         for(var i = 0; i < fiveDayTemps.length; i++){
             var dailyTemp = fiveDayTemps[i];
             var parent = $('<div>');
-            var child =$ ('<p>').text('Temperature: ' + dailyTemp + ' \u00B0C');
+            var child = $ ('<p>').text('Temperature: ' + dailyTemp + ' \u00B0C');
+            parent.append(child);
+            $('#day-' + (i + 1).toString()).html(parent);
+        }
+
+        // Daily Feels Like Weather
+        const fiveDayFeelsLike = [];
+        for (var i = 0; i < data.list.length; i+=8){
+            fiveDayFeelsLike.push(data.list[1].main.temp);
+        }
+        for(var i = 0; i < fiveDayFeelsLike.length; i++){
+            var dailyFeelsLike = fiveDayFeelsLike[i];
+            var parent = $('<div>');
+            var child = $ ('<p>').text('Feels Like: ' + dailyFeelsLike + ' \u00B0C');
             parent.append(child);
             $('#day-' + (i + 1).toString()).html(parent);
         }
